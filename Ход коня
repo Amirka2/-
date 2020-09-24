@@ -1,0 +1,53 @@
+using System;
+
+namespace chess
+{
+    class Program
+    {
+        static int ToInt (char c)
+        {
+            return (int) (c - '0'); //(от 49 до 56) - 49 = число
+        }
+        static void Main(string[] args)
+        {
+            string stay = "stay";
+            do
+            {
+                start:
+                Console.WriteLine("Введите позицию коня до и после хода(через пробел): ");
+                var enter = Console.ReadLine();
+                char[] position = enter.ToCharArray();
+                if ((position.Length > 5)
+                    || ((position[0] > 72) || (position[0] < 65))
+                    || ((position[1] > 56) || (position[1] < 49))
+                    || ((position[3] > 72) || (position[3] < 65))
+                    || ((position[4] > 56) || (position[4] < 49)))
+                {
+                    Console.WriteLine("Неккоректный ввод, введите данные заново в формате 'A1 B3'");
+                    goto start;
+                }
+
+                int x1 = ToInt(position[1]);
+                int y1 = ToInt(position[0]);
+                int x2 = ToInt(position[4]);
+                int y2 = ToInt(position[3]);
+
+                int check1 = Math.Abs(x2 - x1);
+                int check2 = Math.Abs(y2 - y1);
+                
+                if (((check1 == 2) && (check2 == 1))
+                    || ((check1 == 1) && (check2 == 2)))
+                {
+                    Console.WriteLine("Ход корректен, браво");
+                }
+                else 
+                {
+                    Console.WriteLine("Неверный ход, введите данные заново в формате 'A1 B3'!");
+                }
+                Console.WriteLine("Введите exit для выхода из программы, пропустите для продолжения работы");
+                stay = Console.ReadLine();
+                goto start;
+            } while (stay != "exit");
+        }
+    }
+}
