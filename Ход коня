@@ -46,7 +46,6 @@ namespace chess
                 }
                 Console.WriteLine("Введите exit для выхода из программы, пропустите для продолжения работы");
                 stay = Console.ReadLine();
-                goto start;
             } while (stay != "exit");
         }
     }
